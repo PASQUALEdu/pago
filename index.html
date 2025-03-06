@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pago – pagos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Encabezado: Título y botón Compra protegida -->
+  <div class="titulo">
+    <div class="form-header">
+      <h2 class="titulo-center">Completa los datos de tu tarjeta</h2>
+      <button class="compra-protegida">Compra protegida</button>
+    </div>
+  </div>
+
+  <!-- Contenedor Principal -->
+  <div class="main-container">
+    <!-- Columna Izquierda: Formulario -->
+    <div class="left-column">
+      <form class="elementor-form" name="New Form">
+        <!-- Monto a pagar -->
+        <div class="form-group">
+          <label for="form-field-cantidad">Monto a pagar</label>
+          <input type="text" id="form-field-cantidad" name="form-field-cantidad" placeholder="0" required />
+        </div>
+
+        <!-- Número de tarjeta -->
+        <div class="form-group">
+          <label for="card-number">Número de tarjeta</label>
+          <input type="text" id="card-number" name="numero_tarjeta" placeholder="1234 5678 9012 3456" maxlength="19" required />
+          <p id="card-error" class="error-message">Ingresa un número de tarjeta válido</p>
+        </div>
+
+        <!-- Nombre del titular -->
+        <div class="form-group">
+          <label for="card-holder">Nombre del titular</label>
+          <input type="text" id="card-holder" name="card-holder" placeholder="Ej.: María López" required />
+          <p id="holder-error" class="error-message">Solo se permiten letras</p>
+        </div>
+
+        <!-- Vencimiento y CVV -->
+        <div class="form-inline">
+          <div class="form-group small-group">
+            <label for="expiry">Vencimiento</label>
+            <input type="text" id="expiry" name="expiry" placeholder="MM/AA" maxlength="5" required />
+            <p id="expiry-error" class="error-message">Ingresa una fecha válida</p>
+          </div>
+          <div class="form-group small-group">
+            <label for="cvc">Código de seguridad</label>
+            <input type="text" id="cvc" name="cvc" placeholder="123" maxlength="3" required />
+            <p id="cvc-error" class="error-message">Debe contener 3 dígitos</p>
+          </div>
+        </div>
+
+        <!-- Método de Pago (Dropdown) -->
+        <div class="form-group">
+          <label for="payment-method" class="sr-only">ESCOGE TU MÉTODO DE PAGO</label>
+          <select id="payment-method" name="payment-method" class="select-metodo" required>
+            <option value="" hidden>ESCOGE TU MÉTODO DE PAGO</option>
+            <option value="normal">Pago normal</option>
+            <option value="msi">Meses sin intereses</option>
+          </select>
+        </div>
+
+        <!-- Apartado de MSI (Oculto por defecto) -->
+        <div class="msi-container hidden">
+          <label class="msi-option">
+            <input type="radio" name="msi" value="3">
+            Hasta 3 MSI
+          </label>
+          <label class="msi-option">
+            <input type="radio" name="msi" value="6">
+            Hasta 6 MSI
+          </label>
+          <label class="msi-option">
+            <input type="radio" name="msi" value="9">
+            Hasta 9 MSI
+          </label>
+          <label class="msi-option">
+            <input type="radio" name="msi" value="12">
+            Hasta 12 MSI
+          </label>
+          <label class="msi-option">
+            <input type="radio" name="msi" value="18">
+            Hasta 18 MSI
+          </label>
+          <label class="msi-option">
+            <input type="radio" name="msi" value="24">
+            Hasta 24 MSI
+          </label>
+        </div>
+      </form>
+    </div>
+
+    <!-- Columna Derecha: Resumen de pago -->
+    <div class="right-column">
+      <h3>Joyería las fuentes</h3>
+      <div class="detalles-pago">
+        <h4>Detalles del pago</h4>
+        <div class="total-pagar">
+          <span>Total a pagar</span>
+          <span id="tituloDinamico">$0 MXN</span>
+        </div>
+      </div>
+      <!-- Botón Pagar (inicialmente deshabilitado) -->
+      <button id="custom-submit" class="btn-pagar" disabled>Pagar</button>
+      
+      <!-- Contenedor para mensajes de estado (spinner y textos) -->
+      <div id="status-message" class="status-message"></div>
+    </div>
+  </div>
+
+  <!-- Mensaje de seguridad (centrado) -->
+  <p class="mensaje-seguridad">
+    En Joyeria las fuentes, tu seguridad es nuestra prioridad.
+    Todas las transacciones están protegidas con
+    <strong>encriptación de nivel bancario</strong> para garantizar
+    que tu información personal y financiera esté segura en todo momento.
+  </p>
+
+  <!-- Script para mostrar/ocultar MSI -->
+  <script>
+    document.getElementById('payment-method').addEventListener('change', function() {
+      const msiDiv = document.querySelector('.msi-container');
+      if (this.value === 'msi') {
+        msiDiv.classList.remove('hidden');
+      } else {
+        msiDiv.classList.add('hidden');
+      }
+    });
+  </script>
+  
+  <script src="js/scripts.js"></script>
+</body>
+</html>
